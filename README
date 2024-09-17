@@ -1,0 +1,89 @@
+# 环境准备
+
+1、在联网机器下载并安装vimplus，参考https://github.com/chxuan/vimplus。压缩打包，发送到目标服务器相应位置
+
+- ~/.vimplus
+- ~/.vim
+- ~/.vimrc.custom.config
+- ~/.vimrc.custom.plugins
+- ~/.vimrc
+
+一个已经解压好的包见附件
+
+2、下载并离线安装python，参考https://github.com/ycm-core/YouCompleteMe/issues/35804
+
+```
+./configure --prefix=/home/wangtuo/bin/python --enable-shared
+make
+make install
+```
+
+```
+export PATH=/home/wangtuo/bin/python/bin:$PATH
+export LD_LIBRARY_PATH=/home/wangtuo/bin/python/lib:$LD_LIBRARY_PATH
+export PYTHON_INCLUDE_DIR=/home/wangtuo/bin/python/include/python3.8:$PYTHON_INCLUDE_DIR
+```
+
+3、下载并离线安装vim，参考https://github.com/ycm-core/YouCompleteMe/issues/3580
+
+```
+pythonver=python3.8
+export LDFLAGS="-rdynamic"
+./configure --prefix=/home/wangtuo/bin/vim/ --with-features=huge --enable-terminal --enable-multibyte --enable-python3interp=yes --with-python3-command=$pythonver --with-python3-config-dir=$(${pythonver}-config --configdir) --enable-cscope --enable-fail-if-missing
+make
+make install
+```
+
+```
+export PATH=/home1/wangtuo/bin/vim/bin:$PATH
+```
+
+4、下载安装cmake
+
+```
+./configure --prefix=/home/wangtuo/bin/cmake
+make
+make install
+```
+
+```
+export PATH=/home1/wangtuo/bin/cmake/bin:$PATH
+```
+
+4、下载并安装rg
+
+5、下载并安装fzf
+
+```
+cd ~/.vim/plugged/fzf-master/
+./install
+```
+
+6、安装YCM, 见https://github.com/ycm-core/YouCompleteMe/issues/3580
+
+7、下载安装libevent ncurses tmux
+
+```
+./configure --prefix=/home/wangtuo/bin/libevent --disable-shared
+make
+make install
+
+./configure --prefix=/home/wangtuo/bin/ncurses
+make
+make install
+
+
+./configure CFLAGS="-I/home/wangtuo/bin/libevent/include -I/home/wangtuo/bin/ncurses/include" LDFLAGS="-L/home/wangtuo/bin/libevent/lib -L/home/wangtuo/bin/ncurses/lib" --prefix=/home/wangtuo/bin/tmux/
+make && make install
+
+pip3 install libtmux-0.25.0-py3-none-any.whl
+```
+
+```
+export PATH=/home/wangtuo/bin/tmux/bin:$PATH
+```
+
+​	下载相关tmux插件，放置在~/.tmux/plugins
+
+~目录下拷贝.tmux.conf
+
